@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simular Carga de Contenido</title>
+    <style>
+        .caja {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease, margin-top 0.5s ease;
+        }
+
+        .cargando {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: black;
+        }
+
+        .contenido {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s linear;
+        }
+
+        .contenido.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #miCaja.desplazada {
+            margin-top: 220px; /* Desplazar hacia abajo */
+        }
+    </style>
+</head>
+<body>
+    <div id="miCaja" class="caja">
+        <div class="cargando">Cargando...</div>
+        <div class="contenido">
+            <p>Este es el contenido real de la caja 1.</p>
+        </div>
+    </div>
+
+    <div id="miCaja2" class="caja" style="display: none;">
+        <div class="cargando">Cargando...</div>
+        <div class="contenido">
+            <p>Este es el contenido real de la caja 2.</p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarContenido() {
+            const cargando1 = document.querySelector('#miCaja .cargando');
+            const contenido1 = document.querySelector('#miCaja .contenido');
+
+            // Ocultar el texto de "Cargando..." y mostrar el contenido real de la primera caja
+            cargando1.style.display = 'none';
+            contenido1.classList.add('visible');
+
+            // Mostrar la segunda caja después de un breve retraso
+            setTimeout(() => {
+                const miCaja2 = document.getElementById('miCaja2');
+                miCaja2.style.display = 'block';
+
+                const cargando2 = document.querySelector('#miCaja2 .cargando');
+                const contenido2 = document.querySelector('#miCaja2 .contenido');
+
+                // Ocultar el texto de "Cargando..." y mostrar el contenido real de la segunda caja
+                cargando2.style.display = 'none';
+                contenido2.classList.add('visible');
+
+                // Desplazar la primera caja hacia abajo
+                const miCaja1 = document.getElementById('miCaja');
+                miCaja1.classList.add('desplazada');
+            }, 1000); // Esperar 1 segundo antes de mostrar la segunda caja
+        }
+
+        // Simular un retraso en la carga de contenido de la primera caja (por ejemplo, 3 segundos)
+        setTimeout(mostrarContenido, 3000);
+    </script>
+</body>
+</html>
