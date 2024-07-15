@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simular Carga de Contenido</title>
+    <style>
+        #miCaja {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cargando {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: black;
+        }
+
+        .contenido {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s linear;
+        }
+
+        .contenido.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="miCaja">
+        <div class="cargando">Cargando...</div>
+        <div class="contenido">
+            <p>Este es el contenido real de la caja.</p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarContenido() {
+            const cargando = document.querySelector('.cargando');
+            const contenido = document.querySelector('.contenido');
+
+            // Ocultar el texto de "Cargando..." y mostrar el contenido real
+            cargando.style.display = 'none';
+            contenido.classList.add('visible');
+        }
+
+        // Simular un retraso en la carga de contenido (por ejemplo, 3 segundos)
+        setTimeout(mostrarContenido, 3000);
+    </script>
+</body>
+</html>
